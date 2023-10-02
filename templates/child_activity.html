@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAR</title>
+  
+</head>
+<body>
+  <h2>User : {{ username }}</h2>
+  <h2>Address : {{ address }}</h2>
+  <h2>City : {{ city }}</h2>
+  <h2>Country : {{ country }}</h2>
+  <h2>Longitude : {{ longitude }}</h2>
+  <h2>Latitude : {{ latitude }}</h2>
+  <div style="width: 70%; height: 600px;">
+    <!-- <p id="test_link"></p>  -->
+    <iframe id="map" src="" frameborder="0" style="width: 100%; height: 100%;"></iframe>
+  </div>
+  <form action="/web_get_location" method="post">
+    <input type="text" name="username" value='{{ username }}' style="display: none;">
+    <input type="submit" name="Submit" value="Get Location" id="but">
+  </form>
+  <script>
+    var but = document.querySelector("[name='Submit']");
+    setInterval(function () {but.click();},10000);
+    function get_map_link() {
+      var link = "https://www.google.com/maps?q="+'{{ latitude }}'+","+'{{ longitude }}'+"&hl=es;z=14&output=embed";
+      return link;
+    }
+    document.getElementById('map').src = get_map_link();
+    // document.getElementById("test_link").innerHTML = get_map_link();
+  </script>
+</body>
+</html>
